@@ -15,7 +15,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../test-admin/build/')));
+app.use(express.static(path.join(__dirname, './test-admin/build/')));
 
 app.get("/api/videos", async (req, res)=> {
   res.status(200).send(await fetchVideos())
