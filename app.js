@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './test-admin/build/')));
 
 app.get("/api/videos", async (req, res)=> {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.status(200).send(await fetchVideos())
 })
 
