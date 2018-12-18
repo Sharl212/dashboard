@@ -1,8 +1,13 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var YoutubeSchema = new Schema({
-    _id: String,
+const YoutubeSchema = new Schema({
+    _id: {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
     url: String,
     description: String
 });

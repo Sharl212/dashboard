@@ -6,7 +6,7 @@ var cors = require('cors');
 
 const app = express();
 
-const {fetchVideos, getVideo, editVideo} = require("./methods/videos");
+const {fetchVideos, getVideo, editVideo, addVideo} = require("./methods/videos");
 
 // * establish db connection
 require("./database");
@@ -20,19 +20,32 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, './test-admin/build/')));
 
+// ? GET all videos
 app.get("/api/videos", async (req, res)=> {
   res.status(200).send(await fetchVideos())
 })
 
+// ? GET video by id
 app.get("/api/videos/:id", async (req, res)=> {
   res.status(200).send(await getVideo(req.params.id))
 })
 
+// ? EDIT video by id
 app.put("/api/videos/:id", async (req, res)=> {
   console.log(req.body)
   res.status(200).send(await editVideo(req.params.id, req.body))
 })
 
+app.post("/api/videos", async (req, res)=>{
+  console.log(req.body)
+    const create = await addVideo(req.body);
+
+    res.status(201).send(create);
+});
+
+
+
+// ? AUTHENTICATION
 app.post("/api/login/", async (req, res)=> {
   console.log(req.body)
   if(req.body.username == "mike" && req.body.password == "123123") return res.status(200).send({"TOKEN":"123123123"})

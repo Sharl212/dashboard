@@ -29,7 +29,7 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
         return { url: `${API_URL}/${resource}/${params.id}` };
     case GET_MANY: {
         const query = {
-            filter: JSON.stringify({ id: params.ids }),
+            filter: JSON.stringify({ id: params.ids })
         };
         return { url: `${API_URL}/${resource}?${stringify(query)}` };
     }

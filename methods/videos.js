@@ -1,7 +1,9 @@
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const YoutubeSchema = require("../models/youtube");
 
 const fetchVideos = () => {
-    return YoutubeSchema.find({}).then(res => res).catch(err =>err)
+    return YoutubeSchema.find().then(res => res).catch(err =>err)
 }
 
 const getVideo = (id) => {
@@ -15,4 +17,21 @@ const editVideo = (id, body) => {
     }).then(res => res).catch(err =>err)
 }
 
-module.exports = {fetchVideos, getVideo, editVideo };
+const addVideo = (body) =>{
+    let result;
+    const newVideo = new YoutubeSchema({
+        "_id": new ObjectId(),
+        "description": body.description,
+        "url": body.url
+    });
+
+    try{
+        result = newVideo.save();
+    } catch(e) {
+        result = e;
+    }
+
+    return result;
+}
+
+module.exports = {fetchVideos, getVideo, editVideo, addVideo };
