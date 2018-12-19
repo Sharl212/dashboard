@@ -2,17 +2,6 @@ import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
 import { API_URL } from "./env"
 
 export default (type, params) => {
-    if (type === AUTH_LOGIN) {
-        console.log(AUTH_LOGIN)
-        // ...
-    }
-    if (type === AUTH_LOGOUT) {
-        console.log(AUTH_LOGOUT)
-
-    }
-    if (type === AUTH_ERROR) {
-        console.log(AUTH_ERROR)
-    }
     if (type === AUTH_CHECK) {
         return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
     }

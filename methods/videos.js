@@ -17,6 +17,12 @@ const editVideo = (id, body) => {
     }).then(res => res).catch(err =>err)
 }
 
+const deleteVideo = (id) => {
+    return YoutubeSchema.findByIdAndRemove(id)
+    .then(deleted => deleted)
+    .catch(e => e)
+}
+
 const addVideo = (body) =>{
     let result;
     const newVideo = new YoutubeSchema({
@@ -34,4 +40,4 @@ const addVideo = (body) =>{
     return result;
 }
 
-module.exports = {fetchVideos, getVideo, editVideo, addVideo };
+module.exports = {fetchVideos, getVideo, editVideo, addVideo, deleteVideo };

@@ -6,7 +6,7 @@ var cors = require('cors');
 
 const app = express();
 
-const {fetchVideos, getVideo, editVideo, addVideo} = require("./methods/videos");
+const {fetchVideos, getVideo, editVideo, addVideo, deleteVideo} = require("./methods/videos");
 
 // * establish db connection
 require("./database");
@@ -28,6 +28,11 @@ app.get("/api/videos", async (req, res)=> {
 // ? GET video by id
 app.get("/api/videos/:id", async (req, res)=> {
   res.status(200).send(await getVideo(req.params.id))
+})
+
+// ? GET video by id
+app.delete("/api/videos/:id", async (req, res)=> {
+  res.status(200).send(await deleteVideo(req.params.id))
 })
 
 // ? EDIT video by id
