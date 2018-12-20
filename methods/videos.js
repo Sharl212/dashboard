@@ -3,7 +3,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const YoutubeSchema = require("../models/youtube");
 
 const fetchVideos = () => {
-    return YoutubeSchema.find().then(res => res).catch(err =>err)
+    return YoutubeSchema.find().sort({ number: 1}).then(res => res).catch(err =>err)
 }
 
 const getVideo = (id) => {
@@ -15,6 +15,7 @@ const editVideo = (id, body) => {
 
     return YoutubeSchema.findByIdAndUpdate(id, {
         "description":body.description,
+        "number":body.number,
         "url": swapUrl
     }).then(res => res).catch(err =>err)
 }
@@ -32,6 +33,7 @@ const addVideo = (body) =>{
     const newVideo = new YoutubeSchema({
         "_id": new ObjectId(),
         "description": body.description,
+        "number": body.number,
         "url": swapUrl
     });
 

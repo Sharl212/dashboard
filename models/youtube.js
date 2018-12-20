@@ -9,7 +9,8 @@ const YoutubeSchema = new Schema({
         trim: true
     },
     url: String,
-    description: String
+    description: String,
+    number: Number
 });
 
 YoutubeSchema.set('toJSON', {

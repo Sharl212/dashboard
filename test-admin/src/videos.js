@@ -2,15 +2,15 @@ import React from 'react';
 import { List, Create, DateInput, Edit, SimpleForm, TextInput, Datagrid, TextField } from 'react-admin';
 
 const PostTitle = ({ record }) => {
-    return <span>Post {record ? `"${record.id}"` : ''}</span>;
+    return <span>Post {record ? `"${record.number}"` : ''}</span>;
 };
 
 export const VideosList = props => (
     <List {...props}>
         <Datagrid rowClick="edit">
-            <TextField source="id" />
-            <TextField source="description"/>
+            <TextField source="number" />
             <TextField source="url" />
+            <TextField source="description"/>
         </Datagrid>
     </List>
 );
@@ -18,8 +18,9 @@ export const VideosList = props => (
 export const VideoEdit = (props) => (
     <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
-            <TextInput source="description" options={{ multiline: true }}/>
             <TextInput source="url" />
+            <TextInput source="number" />
+            <TextInput source="description" options={{ multiline: true }}/>
         </SimpleForm>
     </Edit>
 );
@@ -27,8 +28,9 @@ export const VideoEdit = (props) => (
 export const VideoPost = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="description" />
-            <TextInput source="url" options={{ multiline: true }} />
+            <TextInput source="url" />
+            <TextInput source="number" />
+            <TextInput source="description" options={{ multiline: true }}/>
         </SimpleForm>
     </Create>
 );
