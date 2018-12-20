@@ -7,6 +7,7 @@ var cors = require('cors');
 const app = express();
 
 const {fetchVideos, getVideo, editVideo, addVideo, deleteVideo} = require("./methods/videos");
+const {fetchPosts, getPost, editPost, addPost, deletePost } = require("./methods/posts");
 
 // * establish db connection
 require("./database");
@@ -41,12 +42,45 @@ app.put("/api/videos/:id", async (req, res)=> {
   res.status(200).send(await editVideo(req.params.id, req.body))
 })
 
+// ? POST new video
 app.post("/api/videos", async (req, res)=>{
   console.log(req.body)
     const create = await addVideo(req.body);
 
     res.status(201).send(create);
 });
+
+
+
+// ? GET all posts
+app.get("/api/posts", async (req, res)=> {
+  res.status(200).send(await fetchPosts())
+})
+
+// ? GET video by id
+app.get("/api/posts/:id", async (req, res)=> {
+  res.status(200).send(await getPost(req.params.id))
+})
+
+// ? DELETE video by id
+app.delete("/api/posts/:id", async (req, res)=> {
+  res.status(200).send(await deletePost(req.params.id))
+})
+
+// ? EDIT video by id
+app.put("/api/posts/:id", async (req, res)=> {
+  console.log(req.body)
+  res.status(200).send(await editPost(req.params.id, req.body))
+})
+
+// ? POST new post
+app.post("/api/posts", async (req, res)=>{
+  console.log(req.body)
+    const create = await addPost(req.body);
+
+    res.status(201).send(create);
+});
+
 
 
 

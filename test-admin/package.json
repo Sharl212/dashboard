@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "ra-data-json-server": "^2.5.2",
     "ra-data-simple-rest": "^2.5.2",
