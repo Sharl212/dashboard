@@ -11,9 +11,11 @@ const getVideo = (id) => {
 }
 
 const editVideo = (id, body) => {
+    const swapUrl = body.url.replace("watch?v=", "embed/");
+
     return YoutubeSchema.findByIdAndUpdate(id, {
         "description":body.description,
-        "url": body.url
+        "url": swapUrl
     }).then(res => res).catch(err =>err)
 }
 
@@ -25,10 +27,12 @@ const deleteVideo = (id) => {
 
 const addVideo = (body) =>{
     let result;
+    const swapUrl = body.url.replace("watch?v=", "embed/");
+    console.log(swapUrl)
     const newVideo = new YoutubeSchema({
         "_id": new ObjectId(),
         "description": body.description,
-        "url": body.url
+        "url": swapUrl
     });
 
     try{
