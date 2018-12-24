@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-var cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 
@@ -20,6 +20,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, './test-admin/build/')));
+
+const PostSchema = require("./models/post");
+
+// ? Search all posts by "title", "description"
+app.post("/api/search", async (req, res) => {
+  console.log(req.body)
+  const searchResult = await PostSchema.find({"$text": {"$search": req.body.query}});
+  const status = searchResult.length > 0 ? 302 : 404
+
+  res.status(status).send(searchResult);
+});
 
 // ? GET all videos
 app.get("/api/videos", async (req, res)=> {

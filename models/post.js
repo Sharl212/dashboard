@@ -8,8 +8,8 @@ const PostSchema = new Schema({
         minlength: 1,
         trim: true
     },
-    title: String,
-    description: String,
+    title: {type: String, index: true },
+    description: {type: String, index: true },
     url: String,
     number: Number,
     createdAt: String
@@ -22,5 +22,7 @@ PostSchema.set('toJSON', {
         delete ret._id
     }
 });
+
+PostSchema.index({ title: "text", description: "text" })
 
 module.exports = mongoose.model('Post', PostSchema);
